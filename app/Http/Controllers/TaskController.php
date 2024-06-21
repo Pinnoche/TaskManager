@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Inertia\Inertia;
+use Inertia\Response;
 use Illuminate\Http\Request;
+use App\Http\Resources\TaskResource;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 
 class TaskController extends Controller
 {
@@ -15,8 +21,8 @@ class TaskController extends Controller
     {
         if(Auth::check()){
             $tasks = TaskResource::collection(auth()->user()->tasks()->get());
-
-        return Inertia::render('Tasks/Index', compact('tasks'));
+            $pageName = 'Task';
+        return Inertia::render('Tasks/Index', compact('tasks', 'pageName'));
         }
         return redirect()->route('login')->with('message', 'Please Login to View your tasks');
     }
@@ -26,7 +32,11 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Tasks/Create');
+        if(Auth::check()){
+            $pageName = 'Create Task';
+            return Inertia::render('Tasks/Create', compact('pageName'));
+        }
+        return redirect()->route('login')->with('message', 'Please Login to View your tasks');
     }
 
     /**
@@ -53,7 +63,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return Inertia::render('Tasks/Edit', compact('task'));
+        $pageName = 'Edit Task';
+        return Inertia::render('Tasks/Edit', compact('task', 'pageName'));
     }
 
     /**

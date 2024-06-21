@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +27,8 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             'author' => 'required|string',
-            'title' => ['required','string', 'max:200', Rule::unique(User::class)->ignore($this->user()->id)],
-            'description' => 'required|string|min|20'
+            'title' => ['required','string', 'max:200', 'unique:'.Task::class],
+            'description' => 'required|string|min:20'
         ];
     }
 
