@@ -18,10 +18,14 @@ export default defineConfig({
             },
         }),
     ],
+    build: {
+        outDir: 'public/dist', 
+        emptyOutDir: true,
+    },
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'),
-            ziggy: path.resolve(__dirname, 'node_modules/ziggy-js') // Correct path to ziggy-js
+            ziggy: path.resolve(__dirname, 'node_modules/ziggy-js')
         },
     },
 });
