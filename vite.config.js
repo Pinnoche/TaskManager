@@ -18,10 +18,10 @@ export default defineConfig({
             },
         }),
     ],
-    build: {
-        outDir: 'public/dist', 
-        emptyOutDir: true,
-    },
+    // build: {
+    //     outDir: 'public/dist', 
+    //     emptyOutDir: true,
+    // },
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'),
