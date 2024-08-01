@@ -19,12 +19,14 @@ class TaskController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
-            $tasks = TaskResource::collection(auth()->user()->tasks()->get());
+        // if(Auth::check()){
+            $tasks = TaskResource::collection(auth()->user()->tasks()->orderBy('created_at', 'desc')->get());
+            $messages = session('messages');
+            $dM = session('message');
             $pageName = 'Task';
-        return Inertia::render('Tasks/Index', compact('tasks', 'pageName'));
-        }
-        return redirect()->route('login')->with('message', 'Please Login to View your tasks');
+        return Inertia::render('Tasks/Index', compact('tasks', 'messages', 'pageName', 'dM'));
+        // }
+        // return redirect()->route('login')->with('message', 'Please Login to View your tasks');
     }
 
     /**
@@ -32,10 +34,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        if(Auth::check()){
+        // if(Auth::check()){
             $pageName = 'Create Task';
             return Inertia::render('Tasks/Create', compact('pageName'));
-        }
+        // }
         return redirect()->route('login')->with('message', 'Please Login to View your tasks');
     }
 
@@ -47,7 +49,8 @@ class TaskController extends Controller
         $user = auth()->user();
 
         $user->tasks()->create($request->validated());
-        return redirect()->route('tasks.index')->with('message', 'Your Task has been Posted Successfully');
+       
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -73,8 +76,10 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, Task $task)
     {
         $task->update($request->validated());
-
-        return redirect()->route('tasks.index')->with('message', 'Your Task has been Updated Successfully');
+        return redirect()->route('tasks.index')->with('messages', [
+            'message' => 'Your Task has been Updated Successfully',
+            'taskId' => $task->id
+        ]);
     }
 
     /**
@@ -83,7 +88,6 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-
         return redirect()->route('tasks.index')->with('message', 'Your Task has been Removed Successfully');
     }
 }

@@ -18,6 +18,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "firebase": "^10.12.3",
         "ziggy-js": "^2.2.1"
     }
 }
