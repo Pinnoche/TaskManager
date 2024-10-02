@@ -20,5 +20,9 @@
     "dependencies": {
         "firebase": "^10.12.3",
         "ziggy-js": "^2.2.1"
+    },
+    "engines": {
+        "node": ">=20.0.0"
     }
+
 }
