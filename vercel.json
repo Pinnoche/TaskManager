@@ -4,7 +4,7 @@
       { "src": "resources/js/app.js", "use": "@vercel/node" }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "/public/index.php" }
+      { "src": "/(.*)", "dest": "/" }
     ],
     "env": {
       "APP_ENV": "production"
