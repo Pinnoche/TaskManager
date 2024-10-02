@@ -19,14 +19,11 @@ class TaskController extends Controller
      */
     public function index()
     {
-        // if(Auth::check()){
             $tasks = TaskResource::collection(auth()->user()->tasks()->orderBy('created_at', 'desc')->get());
             $messages = session('messages');
             $dM = session('message');
             $pageName = 'Task';
         return Inertia::render('Tasks/Index', compact('tasks', 'messages', 'pageName', 'dM'));
-        // }
-        // return redirect()->route('login')->with('message', 'Please Login to View your tasks');
     }
 
     /**

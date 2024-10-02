@@ -31,7 +31,6 @@ onMounted( ()=> {
         }, 3000);
     }
     
-console.log(props.messages);
 });
 onUpdated( () => {
     if(props.dM) {
