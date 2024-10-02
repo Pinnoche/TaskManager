@@ -3,8 +3,8 @@
       { "src": "api/index.php", "use": "@vercel/php" },
       { "src": "resources/js/app.js", "use": "@vercel/node" }
     ],
-    "routes": [
-      { "src": "/(.*)", "dest": "/public/index.php" }
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/" }
     ],
     "env": {
       "APP_ENV": "production"
