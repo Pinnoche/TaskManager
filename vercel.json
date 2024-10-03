@@ -1,25 +1,27 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    },
-    {
-      "src": "api/index.php", 
-      "use": "@vercel/php" 
-    }
-  ],
-  "routes": [
-    {
+    "framework": null,
+  "functions": {
+      "api/index.php": { "runtime": "vercel-php@0.6.0" }
+  },
+  "routes": [{
       "src": "/(.*)",
-      "dest": "/public/index.php"
-    }
-  ],
+      "dest": "/api/index.php"
+  }],
   "env": {
-    "VITE_APP_URL": "https://dmj-task-manager.vercel.app"
+      "APP_ENV": "production",
+      "APP_DEBUG": "true",
+      "APP_URL": "https://dmj-task-manager.vercel.app",
+
+      "APP_CONFIG_CACHE": "/tmp/config.php",
+      "APP_EVENTS_CACHE": "/tmp/events.php",
+      "APP_PACKAGES_CACHE": "/tmp/packages.php",
+      "APP_ROUTES_CACHE": "/tmp/routes.php",
+      "APP_SERVICES_CACHE": "/tmp/services.php",
+      "VIEW_COMPILED_PATH": "/tmp",
+
+      "CACHE_DRIVER": "array",
+      "LOG_CHANNEL": "stderr",
+      "SESSION_DRIVER": "cookie"
   }
 }
