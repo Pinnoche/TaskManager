@@ -1,9 +1,22 @@
 {
-  "routes": [
-      { "src": "/(.*)", "dest": "/public/index.php" }
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "index.php",
+      "use": "@vercel/php"
+    }
   ],
-  "env": {
-      "APP_ENV": "production"
-  },
-  "buildCommand": "npm install && npm run build"
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "index.php"
+    }
+  ]
 }
