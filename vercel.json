@@ -1,6 +1,6 @@
 {
     "builds": [
-      { "src": "/public/index.php", "use": "@vercel/php" },
+      { "src": "api/index.php", "use": "@vercel/php" },
       { "src": "resources/js/app.js", "use": "@vercel/node" }
     ],
     "routes": [
@@ -9,6 +9,6 @@
     "env": {
       "APP_ENV": "production"
     },
-    "buildCommand": "composer install && npm run build"
+    "buildCommand": "composer install && npm install && npm run build"
   }
   
