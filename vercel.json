@@ -1,14 +1,25 @@
 {
-    "builds": [
-      { "src": "api/index.php", "use": "@vercel/php" },
-      { "src": "resources/js/app.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "/public/index.php" }
-    ],
-    "env": {
-      "APP_ENV": "production"
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
     },
-    "buildCommand": "composer install && npm install && npm run build"
+    {
+      "src": "api/index.php", 
+      "use": "@vercel/php" 
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/public/index.php"
+    }
+  ],
+  "env": {
+    "VITE_APP_URL": "https://dmj-task-manager.vercel.app"
   }
-  
+}
