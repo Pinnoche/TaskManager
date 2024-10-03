@@ -9,14 +9,14 @@
       }
     },
     {
-      "src": "index.php",
+      "src": "public/index.php",
       "use": "@vercel/php"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "index.php"
+      "dest": "/public/index.php"
     }
   ]
 }
